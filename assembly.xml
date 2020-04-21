@@ -1,0 +1,215 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>bin</id>
+    <!-- 最终打包成一个用于发布的zip文件 -->
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <!-- Adds dependencies to zip package under lib directory -->
+    <dependencySets>
+        <dependencySet>
+            <!--
+               	不使用项目的artifact，第三方jar不要解压，打包进zip文件的lib目录
+           -->
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <!-- 把项目相关的说明文件，打包进zip文件的根目录 -->
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>README*</include>
+                <include>LICENSE*</include>
+                <include>NOTICE*</include>
+            </includes>
+        </fileSet>
+
+        <!-- 把${project.basedir}\src\resources下的日志配置文件，打包进zip文件的config目录 -->
+        <fileSet>
+            <directory>${project.basedir}\src\main\resources</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>logback.xml</include>
+                <include>*.yml</include>
+                <include>*.yaml</include>
+            </includes>
+        </fileSet>
+
+        <!-- 把${project.basedir}\config下的文件，打包进zip文件的config目录 -->
+        <fileSet>
+            <directory>${project.basedir}\src\main\config</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+                <include>*.json</include>
+                <include>*.xlsx</include>
+            </includes>
+        </fileSet>
+
+        <!-- 把项目的脚本文件目录（ src/main/scripts ）中的启动脚本文件，打包进zip文件的根目录 -->
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts</directory>
+            <outputDirectory>./</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>*.bat</include>
+                <include>*.sh</include>
+                <include>*.cmd</include>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <!-- for yajsw begin -->
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\core\commons</directory>
+            <outputDirectory>lib\core\commons</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\core\jna</directory>
+            <outputDirectory>lib\core\jna</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\core\netty</directory>
+            <outputDirectory>lib\core\netty</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\core\yajsw</directory>
+            <outputDirectory>lib\core\yajsw</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\groovy</directory>
+            <outputDirectory>lib\core\extended\groovy</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\commons</directory>
+            <outputDirectory>lib\core\extended\commons</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\yajsw</directory>
+            <outputDirectory>lib\core\extended\yajsw</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\glazedlists</directory>
+            <outputDirectory>lib\core\extended\glazedlists</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\jgoodies</directory>
+            <outputDirectory>lib\core\extended\jgoodies</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\jgoodies</directory>
+            <outputDirectory>lib\core\extended\jgoodies</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\vfs-webdav</directory>
+            <outputDirectory>lib\core\extended\vfs-webdav</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\vfs-dbx</directory>
+            <outputDirectory>lib\core\extended\vfs-dbx</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\scripts\lib\extended\keystore</directory>
+            <outputDirectory>lib\core\extended\keystore</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <!-- for yajsw end -->
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\web</directory>
+            <outputDirectory>web</outputDirectory>
+            <includes>
+                <include>*.html</include>
+                <include>*.html</include>
+                <include>*.css</include>
+                <include>*.js</include>
+                <include>*.jpg</include>
+                <include>*.gif</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\web\js</directory>
+            <outputDirectory>web\js</outputDirectory>
+            <includes>
+                <include>*.js</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}\src\main\web\css</directory>
+            <outputDirectory>web\js</outputDirectory>
+            <includes>
+                <include>*.css</include>
+                <include>*.jpg</include>
+                <include>*.gif</include>
+            </includes>
+        </fileSet>
+
+        <!-- 把项目自己编译出来的jar文件，打包进zip文件的根目录 -->
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
